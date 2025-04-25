@@ -1,8 +1,20 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Container from "./components/Container";
+import Home from "./components/Home";
+import CreateTodo from "./components/CreateTodo";
+import EditTodo from "./components/EditTodo";
+
 function App() {
   return (
-    <div>
-      <h1 className="text-2xl font-bold underline">Todo App</h1>
-    </div>
+    <BrowserRouter>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create-todo" element={<CreateTodo />} />
+          <Route path="/edit-todo" element={<EditTodo />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 }
 
