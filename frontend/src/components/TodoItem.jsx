@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import DeletePopUpModal from "./DeletePopUpModal";
 
 const TodoItem = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
       <tr>
@@ -21,6 +24,7 @@ const TodoItem = () => {
             <BsFillTrashFill
               title="Delete"
               className="text-red-500 hover:text-red-600 cursor-pointer"
+              onClick={() => setShowModal(true)}
             />
             <Link to={"/edit-todo"}>
               <BsFillPencilFill
@@ -81,6 +85,8 @@ const TodoItem = () => {
           </span>
         </td>
       </tr>
+
+      {showModal && <DeletePopUpModal setShowModal={setShowModal} />}
     </>
   );
 };
