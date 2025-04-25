@@ -6,7 +6,7 @@ const SearchTodo = () => {
     <>
       <input
         type="text"
-        placeholder="Search by Topic..."
+        placeholder="Search by Title..."
         className="searchBox"
       />
     </>

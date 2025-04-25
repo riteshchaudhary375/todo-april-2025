@@ -1,30 +1,53 @@
 import React, { useContext } from "react";
 import TodoItem from "./TodoItem";
 import { TodoContext } from "../context/Todo";
+import TodoNotFound from "./TodoNotFound";
+import LoadingSpinner from "./LoadingSpinner";
 
 const TodoItems = () => {
-  const { todos } = useContext(TodoContext);
+  const { tableHeadTags, fetching, todos } = useContext(TodoContext);
+  // console.log(todos);
 
   return (
     <table className="table-auto w-full border border-gray-400 rounded-sm text-left">
       <thead className="bg-gray-400 border-b border-gray-500 uppercase text-gray-800">
         <tr className="font-medium">
-          <th>Status</th>
+          {/* <th>Status</th>
           <th>S.N.</th>
           <th>Title</th>
           <th className="expand">Description</th>
-          <th className="text-center">Actions</th>
+          <th className="text-center">Actions</th> */}
+          {tableHeadTags &&
+            tableHeadTags.map((headTitle, index) => (
+              <th key={index}>{headTitle}</th>
+            ))}
         </tr>
       </thead>
       <tbody>
-        {todos.map((todo, index) => (
-          <TodoItem
-            key={index}
-            title={todo.title}
-            description={todo.description}
-            index={index + 1}
-          />
-        ))}
+        {fetching && (
+          <tr>
+            <td colSpan={tableHeadTags.length}>
+              <LoadingSpinner />
+            </td>
+          </tr>
+        )}
+        {!fetching && (!todos || todos.length === 0) && (
+          <tr>
+            <td colSpan={tableHeadTags.length}>
+              <TodoNotFound />
+            </td>
+          </tr>
+        )}
+        {!fetching &&
+          todos &&
+          todos.map((todo, index) => (
+            <TodoItem
+              key={index}
+              title={todo.title}
+              description={todo.description}
+              index={index + 1}
+            />
+          ))}
       </tbody>
     </table>
   );
