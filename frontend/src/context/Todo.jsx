@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const initialState = {
   todoList: [],
@@ -16,8 +16,51 @@ export const TodoContextProvider = (props) => {
   const [todos, setTodos] = useState([]);
   const [fetching, setFetching] = useState(false);
 
+  // 2. create new todo
+
+  // 1. fetch all todos from DB
+  /*   useEffect(() => {
+    setFetching(true);
+
+    fetch("/api/todo/get-all-todos")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Fetched todos:", data);
+        setFetching(false);
+        setTodos(data.todos);
+      })
+      .catch((err) => {
+        console.log("Error message:", err);
+        setFetching(false);
+      });
+  }, []); */
+
+  const fetchTodos = async () => {
+    try {
+      setFetching(true);
+      const res = await fetch("/api/todo/get-all-todos");
+      const data = await res.json();
+      if (res.ok) {
+        setFetching(false);
+        setTodos(data.todos);
+      } else {
+        setFetching(false);
+        console.log(data.message);
+      }
+    } catch (error) {
+      setFetching(false);
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
   return (
-    <TodoContext.Provider value={{ tableHeadTags, fetching, todos }}>
+    <TodoContext.Provider
+      value={{ tableHeadTags, fetching, todos, fetchTodos }}
+    >
       {props.children}
     </TodoContext.Provider>
   );

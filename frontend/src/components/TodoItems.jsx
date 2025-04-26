@@ -5,51 +5,22 @@ import TodoNotFound from "./TodoNotFound";
 import LoadingSpinner from "./LoadingSpinner";
 
 const TodoItems = () => {
-  const { tableHeadTags, fetching, todos } = useContext(TodoContext);
-  // console.log(todos);
+  const { fetching, todos } = useContext(TodoContext);
+  // console.log("Todos: ", todos);
 
   return (
-    <table className="table-auto w-full border border-gray-400 rounded-sm text-left">
-      <thead className="bg-gray-400 border-b border-gray-500 uppercase text-gray-800">
-        <tr className="font-medium">
-          {/* <th>Status</th>
-          <th>S.N.</th>
-          <th>Title</th>
-          <th className="expand">Description</th>
-          <th className="text-center">Actions</th> */}
-          {tableHeadTags &&
-            tableHeadTags.map((headTitle, index) => (
-              <th key={index}>{headTitle}</th>
-            ))}
-        </tr>
-      </thead>
-      <tbody>
-        {fetching && (
-          <tr>
-            <td colSpan={tableHeadTags.length}>
-              <LoadingSpinner />
-            </td>
-          </tr>
-        )}
-        {!fetching && (!todos || todos.length === 0) && (
-          <tr>
-            <td colSpan={tableHeadTags.length}>
-              <TodoNotFound />
-            </td>
-          </tr>
-        )}
-        {!fetching &&
-          todos &&
-          todos.map((todo, index) => (
-            <TodoItem
-              key={index}
-              title={todo.title}
-              description={todo.description}
-              index={index + 1}
-            />
-          ))}
-      </tbody>
-    </table>
+    <>
+      {fetching && <LoadingSpinner />}
+
+      {/* {!fetching && todos && todos.length === 0 && <TodoNotFound />} */}
+      {/* {!fetching && todos && todos.length > 0 && <TodoItem todos={todos} />} */}
+
+      {!fetching && todos && todos.length > 0 ? (
+        <TodoItem todos={todos} />
+      ) : (
+        <TodoNotFound />
+      )}
+    </>
   );
 };
 
