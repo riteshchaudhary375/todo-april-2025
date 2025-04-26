@@ -1,12 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import DeletePopUpModal from "./DeletePopUpModal";
 import { TodoContext } from "../context/Todo";
 
-const TodoItem = ({ todos }) => {
+const TodoItem = ({ todos, setShowModal, setDeleteTodoID }) => {
+  // console.log(todos);
   const { tableHeadTags } = useContext(TodoContext);
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -39,9 +38,12 @@ const TodoItem = ({ todos }) => {
                     <BsFillTrashFill
                       title="Delete"
                       className="text-red-500 hover:text-red-600 cursor-pointer"
-                      onClick={() => setShowModal(true)}
+                      onClick={() => {
+                        setShowModal(true);
+                        setDeleteTodoID(todo._id);
+                      }}
                     />
-                    <Link to={"/edit-todo"}>
+                    <Link to={`/edit-todo/${todo._id}`}>
                       <BsFillPencilFill
                         title="Edit"
                         className="text-blue-500 hover:text-blue-600  cursor-pointer"
@@ -53,9 +55,6 @@ const TodoItem = ({ todos }) => {
             ))}
         </tbody>
       </table>
-
-      {/* Delete Popup Modal */}
-      {showModal && <DeletePopUpModal setShowModal={setShowModal} />}
     </>
   );
 };

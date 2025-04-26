@@ -8,6 +8,8 @@ export const TodoContext = createContext({
   todoList: [],
   deleteTodo: () => {},
   fetching: false,
+  loading: false,
+  error: null,
 });
 
 export const TodoContextProvider = (props) => {
@@ -15,8 +17,8 @@ export const TodoContextProvider = (props) => {
 
   const [todos, setTodos] = useState([]);
   const [fetching, setFetching] = useState(false);
-
-  // 2. create new todo
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // 1. fetch all todos from DB
   /*   useEffect(() => {
@@ -59,7 +61,17 @@ export const TodoContextProvider = (props) => {
 
   return (
     <TodoContext.Provider
-      value={{ tableHeadTags, fetching, todos, fetchTodos }}
+      value={{
+        tableHeadTags,
+        fetching,
+        todos,
+        setTodos,
+        fetchTodos,
+        loading,
+        setLoading,
+        error,
+        setError,
+      }}
     >
       {props.children}
     </TodoContext.Provider>

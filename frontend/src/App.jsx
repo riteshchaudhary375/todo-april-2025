@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create-todo" element={<CreateTodo />} />
-          <Route path="/edit-todo" element={<EditTodo />} />
+          <Route path="/edit-todo/:todoId" element={<EditTodo />} />
         </Routes>
       </Container>
     </BrowserRouter>

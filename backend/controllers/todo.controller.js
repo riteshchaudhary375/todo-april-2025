@@ -46,3 +46,47 @@ export const getAllTodos = async (req, res, next) => {
     next(error);
   }
 };
+
+//get single todo by id
+export const getTodo = async (req, res, next) => {
+  try {
+    const todoInfo = await Todo.findById(req.params.todoId);
+
+    res.status(200).json({ success: true, todoInfo });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+// edit todo
+export const editTodo = async (req, res, next) => {
+  try {
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      req.params.todoId,
+      {
+        $set: {
+          title: req.body.title,
+          description: req.body.description,
+        },
+      },
+      { new: true }
+    );
+    res
+      .status(201)
+      .json({ success: true, message: "Todo updated", updatedTodo });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// delete todo
+export const deleteTodo = async (req, res, next) => {
+  try {
+    await Todo.findByIdAndDelete(req.params.todoId);
+
+    res.status(200).json({ success: true, message: "Todo deleted" });
+  } catch (error) {
+    next(error);
+  }
+};
