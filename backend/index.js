@@ -12,6 +12,7 @@ mongoose
   .catch((error) => console.log("MongoDB connection failed!", error));
 
 const app = express();
+app.use(express.json()); // for passing json values to server
 
 const PORT = process.env.PORT || 3000;
 
