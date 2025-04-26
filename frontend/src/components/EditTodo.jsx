@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Title from "./Title";
 import { TodoContext } from "../context/Todo";
+import toast from "react-hot-toast";
 
 const EditTodo = () => {
   const { fetchTodos, loading, setLoading, error, setError } =
@@ -53,6 +54,7 @@ const EditTodo = () => {
       if (!res.ok) {
         setLoading(false);
         setError(data.message);
+        toast.error(data.message);
         return;
       }
       if (res.ok) {
@@ -60,10 +62,12 @@ const EditTodo = () => {
         setError(null);
         fetchTodos();
         navigate("/");
+        toast.success(data.message);
       }
     } catch (error) {
       setLoading(false);
       setError(error.message);
+      toast.error(error.message);
     }
   };
 

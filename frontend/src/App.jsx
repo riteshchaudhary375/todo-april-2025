@@ -3,6 +3,7 @@ import Container from "./components/Container";
 import Home from "./components/Home";
 import CreateTodo from "./components/CreateTodo";
 import EditTodo from "./components/EditTodo";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Route path="/edit-todo/:todoId" element={<EditTodo />} />
         </Routes>
       </Container>
+
+      {/* the circle container on body is of react-hot-toast */}
+      <Toaster position="bottom-right" reverseOrder={false} />
     </BrowserRouter>
   );
 }

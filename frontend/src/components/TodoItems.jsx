@@ -4,6 +4,7 @@ import { TodoContext } from "../context/Todo";
 import TodoNotFound from "./TodoNotFound";
 import LoadingSpinner from "./LoadingSpinner";
 import DeletePopUpModal from "./DeletePopUpModal";
+import toast from "react-hot-toast";
 
 const TodoItems = () => {
   const { fetching, todos, setTodos, error, setError } =
@@ -25,16 +26,19 @@ const TodoItems = () => {
       if (!res.ok) {
         setShowModal(false);
         setError(data.message);
+        toast.error(data.message);
         return;
       }
       if (res.ok) {
         setError(null);
         setShowModal(false);
         setTodos((prev) => prev.filter((todo) => todo._id !== deleteTodoID));
+        toast.success(data.message);
       }
     } catch (error) {
       setShowModal(false);
       setError(error.message);
+      toast.error(error.message);
     }
   };
 

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Title from "./Title";
 import { TodoContext } from "../context/Todo";
+import toast from "react-hot-toast";
 
 const CreateTodo = () => {
   const { fetchTodos } = useContext(TodoContext);
@@ -37,7 +38,7 @@ const CreateTodo = () => {
       if (!res.ok) {
         setLoading(false);
         setError(data.message);
-        // toast.error(data.message);
+        toast.error(data.message);
         return;
       }
       if (res.ok) {
@@ -45,10 +46,12 @@ const CreateTodo = () => {
         setError(null);
         fetchTodos();
         navigate("/");
+        toast.success(data.message);
       }
     } catch (error) {
       setLoading(false);
       setError(error.message);
+      toast.error(error.message);
     }
   };
 
