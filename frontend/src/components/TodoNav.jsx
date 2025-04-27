@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import "./TodoNav.css";
 
-const TodoNav = () => {
+const TodoNav = ({ search, setSearch }) => {
   return (
     <div className="todoNav">
-      <SearchTodo />
+      <SearchTodo
+        search={search}
+        setSearch={setSearch}
+      />
 
       <Link to={"/create-todo"}>
         <div className="createNewTodobutton">

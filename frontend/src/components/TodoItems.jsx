@@ -6,7 +6,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import DeletePopUpModal from "./DeletePopUpModal";
 import toast from "react-hot-toast";
 
-const TodoItems = () => {
+const TodoItems = ({ search }) => {
   const { fetching, todos, setTodos, error, setError } =
     useContext(TodoContext);
   // console.log("Todos: ", todos);
@@ -54,6 +54,7 @@ const TodoItems = () => {
           todos={todos}
           setShowModal={setShowModal}
           setDeleteTodoID={setDeleteTodoID}
+          search={search}
         />
       ) : (
         <TodoNotFound />

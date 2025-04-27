@@ -5,6 +5,7 @@ import {
   editTodo,
   getAllTodos,
   getTodo,
+  searchTodo,
   testAPI,
 } from "../controllers/todo.controller.js";
 
@@ -16,5 +17,6 @@ router.get("/get-all-todos", getAllTodos);
 router.get("/get-todo/:todoId", getTodo);
 router.put("/edit-todo/:todoId", editTodo);
 router.delete("/delete-todo/:todoId", deleteTodo);
+router.get("/search-todo", searchTodo);
 
 export default router;

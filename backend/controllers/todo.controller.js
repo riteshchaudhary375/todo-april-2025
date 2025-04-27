@@ -90,3 +90,33 @@ export const deleteTodo = async (req, res, next) => {
     next(error);
   }
 };
+
+// search todo for testing api purpose only
+export const searchTodo = async (req, res, next) => {
+  try {
+    // Express query = strict search
+    // const todos = await Todo.find({ title: "title" });
+    // const todos = await Todo.find({});
+    // const todos = await Todo.find(req.query);
+
+    const { searchTerm } = req.query;
+    const queryObj = {};
+
+    if (searchTerm) {
+      // strict search
+      // queryObj.title = title;
+
+      // mongodb $regex = dynamic search
+      // character search
+      queryObj.searchTerm = { $regex: title, $options: "i" }; // doesnot care for upper and lower case
+    }
+
+    // console.log(queryObj);
+
+    const todos = await Todo.find(queryObj);
+
+    res.status(200).json({ todos });
+  } catch (error) {
+    next(error);
+  }
+};
