@@ -4,15 +4,19 @@ import dotenv from "dotenv";
 
 import todoRoutes from "./routes/todo.route.js";
 
-dotenv.config();
-
 // 1
 import path from "path";
 
+dotenv.config();
+
 mongoose
   .connect(process.env.MONGO)
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.log("MongoDB connection failed!", error));
+  .then(() => {
+    console.log("MongoDB connected");
+  })
+  .catch((error) => {
+    console.log("MongoDB connection failed!", error);
+  });
 
 // 2. project path dir
 const __dirname = path.resolve();
