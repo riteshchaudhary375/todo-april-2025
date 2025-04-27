@@ -52,7 +52,7 @@ const TodoItem = ({
                   <td className={todo.complete === true ? "line-through" : ""}>
                     {todo.title}
                   </td>
-                  <td className="">{todo.description}</td>
+                  <td>{todo.description}</td>
                   <td>
                     <span className="flex items-center justify-center gap-4">
                       <BsFillTrashFill

@@ -1,9 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 
-const initialState = {
-  todoList: [],
-};
-
 export const TodoContext = createContext({
   todoList: [],
   deleteTodo: () => {},

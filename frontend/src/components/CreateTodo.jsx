@@ -70,7 +70,6 @@ const CreateTodo = () => {
             required
           />
           <textarea
-            name=""
             id="description"
             // maxlength="20"
             placeholder="Description..."

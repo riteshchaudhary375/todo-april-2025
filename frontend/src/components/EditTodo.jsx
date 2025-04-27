@@ -78,7 +78,6 @@ const EditTodo = () => {
       <form className="text-left" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <input
-            className=""
             id="title"
             name="title"
             type="text"
