@@ -120,3 +120,35 @@ export const searchTodo = async (req, res, next) => {
     next(error);
   }
 };
+
+// Toggle todo
+export const toggleTodo = async (req, res, next) => {
+  const id = req.params.todoId;
+
+  try {
+    const todoRef = await Todo.findById(id);
+
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      // 1st option, find by params id
+      /* {
+        _id: req.params.todoId,
+      }, */
+      todoRef._id,
+      // 2nd option then take action
+      {
+        complete: !todoRef.complete,
+      },
+      { new: true }
+    );
+
+    await updatedTodo.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Todo updated",
+      updatedTodo,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

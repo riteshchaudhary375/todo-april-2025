@@ -3,7 +3,14 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { TodoContext } from "../context/Todo";
 
-const TodoItem = ({ todos, setShowModal, setDeleteTodoID, search }) => {
+const TodoItem = ({
+  todos,
+  setShowModal,
+  setDeleteTodoID,
+  search,
+  setCheckStatus,
+  onCheckToggle,
+}) => {
   // console.log(todos);
   const { tableHeadTags } = useContext(TodoContext);
 
@@ -34,10 +41,17 @@ const TodoItem = ({ todos, setShowModal, setDeleteTodoID, search }) => {
               .map((todo, index) => (
                 <tr key={index} className="border border-b-gray-300">
                   <td className="text-center">
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      defaultChecked={todo.complete}
+                      onChange={(e) => setCheckStatus(e.target.checked)}
+                      onClick={() => onCheckToggle(todo._id)}
+                    />
                   </td>
                   <td>{index + 1}</td>
-                  <td className="">{todo.title}</td>
+                  <td className={todo.complete === true ? "line-through" : ""}>
+                    {todo.title}
+                  </td>
                   <td className="">{todo.description}</td>
                   <td>
                     <span className="flex items-center justify-center gap-4">

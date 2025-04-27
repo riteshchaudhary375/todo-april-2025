@@ -7,7 +7,7 @@ import DeletePopUpModal from "./DeletePopUpModal";
 import toast from "react-hot-toast";
 
 const TodoItems = ({ search }) => {
-  const { fetching, todos, setTodos, error, setError } =
+  const { fetching, todos, setTodos, error, setError, fetchTodos } =
     useContext(TodoContext);
   // console.log("Todos: ", todos);
 
@@ -15,6 +15,34 @@ const TodoItems = ({ search }) => {
   const [deleteTodoID, setDeleteTodoID] = useState(null);
   // console.log("deleteTodo id: ", deleteTodoID);
 
+  const [checkStatus, setCheckStatus] = useState("");
+  // console.log("checkStatus:", checkStatus);
+
+  const handleCheckToggle = async (todoId) => {
+    try {
+      // console.log("TodoId:", todoId);
+      const res = await fetch(`/api/todo/toggleTodo/${todoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          complete: checkStatus,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.message);
+        return;
+      }
+      if (res.ok) {
+        fetchTodos();
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  // delete todo
   const handleDeleteTodo = async () => {
     try {
       setError(null);
@@ -55,6 +83,8 @@ const TodoItems = ({ search }) => {
           setShowModal={setShowModal}
           setDeleteTodoID={setDeleteTodoID}
           search={search}
+          setCheckStatus={setCheckStatus}
+          onCheckToggle={handleCheckToggle}
         />
       ) : (
         <TodoNotFound />
