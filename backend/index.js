@@ -36,8 +36,8 @@ app.use("/api/todo", todoRoutes);
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 // 4. find the path for index.html from frontend. dist is build by root build command
-app.get("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "/frontend/dist/index.html"))
+app.get("/{*any}", (req, res) =>
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
 );
 
 // middleware to handle errors
