@@ -1,12 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// 1
-import path from "path";
 
 import todoRoutes from "./routes/todo.route.js";
 
 dotenv.config();
+
+// 1
+import path from "path";
 
 mongoose
   .connect(process.env.MONGO)
