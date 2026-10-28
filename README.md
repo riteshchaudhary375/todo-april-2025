@@ -2,6 +2,8 @@
 
 A simple **Todo Management Application** built using the MERN Stack. The app allows users to create, view, search, edit, complete, and delete todo items through a React frontend and Express/MongoDB backend.
 
+**Live project:** [MERN Todo App](https://todo-april-2025.onrender.com/)
+
 ## Features
 
 - Create new todos
@@ -165,4 +167,4 @@ It is useful for learning **CRUD operations, REST APIs, React state management, 
 
 ![Home Page img](/preview/1.%20home-page.png)
 
-- More page view images are in **Preview** folder.
+- More images are in **Preview** folder.
