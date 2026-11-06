@@ -4,6 +4,10 @@ A simple **Todo Management Application** built using the MERN Stack. The app all
 
 **Live project:** [MERN Todo App](https://todo-april-2025.onrender.com/)
 
+### NOTE:
+
+    - Full documentation of this project is in document folder.
+
 ## Features
 
 - Create new todos
